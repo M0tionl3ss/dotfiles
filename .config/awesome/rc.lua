@@ -42,7 +42,7 @@ do
     end)
 end
 -- Autorun
-awful.spawn("picom")
+awful.spawn("picom --no-vsync")
 awful.spawn("nitrogen --restore")
 
 -- }}}
