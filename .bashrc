@@ -15,3 +15,9 @@ alias mv='mv -i'
 alias ip='ip -color=auto'
 alias la='ls -a'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias vim='nvim'
+alias v='nvim'
+alias ..='cd ..'
+
+# Sourcing
+source ~/Scripts/system-info.sh

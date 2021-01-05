@@ -41,18 +41,26 @@ do
         in_error = false
     end)
 end
+
+
+
 -- Autorun
 awful.spawn("picom")
 awful.spawn("nitrogen --restore")
 
+-- Example how to work with the Naughty dbus
+-- naughty.config.presets.second_screen = {screen = 2}
+-- table.insert(naughty.dbus.config.mapping, {{appname = "Spotify"}, naughty.config.presets.second_screen})
 -- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.useless_gap = 5
+beautiful.notification_icon_size = 0
+
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -67,9 +75,9 @@ modkey = "Mod4"
 awful.layout.layouts = {
 --    awful.layout.suit.floating,
     awful.layout.suit.tile,
---    awful.layout.suit.tile.left,
---    awful.layout.suit.tile.bottom,
---    awful.layout.suit.tile.top,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
 --    awful.layout.suit.fair,
 --    awful.layout.suit.fair.horizontal,
 --    awful.layout.suit.spiral,
@@ -109,9 +117,48 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+-- System info
+
+-- GPU
+
+mygpuwidget = wibox.widget {
+	{
+		{
+		
+			wibox.widget.textbox(" "),
+			{
+				image = "/home/johnny/Downloads/video-card.png",
+				resize = true,
+				widget = wibox.widget.imagebox,
+			},
+			awful.widget.watch('bash -c "nvidia-smi --query-gpu="utilization.gpu"  --format=csv,noheader"',5),	
+			{
+				image = "/home/johnny/Downloads/thermometer_icon.png",
+				resize = true,
+				widget = wibox.widget.imagebox,
+			},
+			awful.widget.watch('bash -c "echo $(nvidia-smi --query-gpu="temperature.gpu" --format=csv,noheader) °C"',5),
+			wibox.widget.textbox(" "),
+			layout = wibox.layout.fixed.horizontal,
+			spacing = 5,
+		},
+		widget = wibox.container.background,
+		bg = "#ff3370",
+		fg = "#000",
+		shape = gears.shape.octogon,
+
+
+	},
+	layout = wibox.layout.fixed.horizontal,
+}
+
+
 -- {{{ Wibar
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+month_calendar = awful.widget.calendar_popup.month()
+month_calendar:attach(mytextclock, 'tr')
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -208,13 +255,15 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+--            mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+	    mygpuwidget,
+	    wibox.widget.textbox(" | "),
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
@@ -472,7 +521,7 @@ awful.rules.rules = {
         class = {
           "Arandr",
           "Blueman-manager",
-          "Gpick",
+	  "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.
           "Sxiv",
@@ -495,7 +544,13 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
+    }, {
+	    rule = { class = "Steam" },
+	    properties = {focus = false},
+    }, {
+	    rule = { class = "Spotify"},
+	    properties = { screen = 2, },
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
