@@ -351,7 +351,10 @@ globalkeys = gears.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
-
+    awful.key({}, "Print", function () awful.spawn.with_shell("sleep 0.2 && scrot -s") end,
+              {description = "Take a screenshot", group = "Programs"}),
+    awful.key({}, "XF86Calculator", function () awful.spawn("galculator") end,
+              {description = "Take a screenshot", group = "Programs"}),
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
