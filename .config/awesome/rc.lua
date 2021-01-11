@@ -55,9 +55,13 @@ awful.spawn("nitrogen --restore")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
+
+my_wibar_bg_color = "#141414"
+
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.useless_gap = 5
 beautiful.notification_icon_size = 0
+beautiful.bg_systray = my_wibar_bg_color
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
@@ -244,11 +248,12 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+	bg = my_wibar_bg_color
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = my_wibar_bg_color})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -354,7 +359,9 @@ globalkeys = gears.table.join(
     awful.key({}, "Print", function () awful.spawn.with_shell("sleep 0.2 && scrot -s") end,
               {description = "Take a screenshot", group = "Programs"}),
     awful.key({}, "XF86Calculator", function () awful.spawn("galculator") end,
-              {description = "Take a screenshot", group = "Programs"}),
+              {description = "Open up calculator", group = "Programs"}),
+    awful.key({modkey,		}, "e", function () awful.spawn("thunar") end,
+              {description = "Open the Thunar file explorer", group = "Programs"}),
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
