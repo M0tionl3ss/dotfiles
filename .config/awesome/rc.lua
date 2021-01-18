@@ -47,6 +47,7 @@ end
 -- Autorun
 awful.spawn("picom")
 awful.spawn("nitrogen --restore")
+awful.spawn("thunar --daemon")
 
 -- Example how to work with the Naughty dbus
 -- naughty.config.presets.second_screen = {screen = 2}
@@ -60,6 +61,7 @@ my_wibar_bg_color = "#141414"
 
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.useless_gap = 5
+beautiful.font = 'FiraCode Nerd Font 10'
 beautiful.notification_icon_size = 0
 beautiful.bg_systray = my_wibar_bg_color
 

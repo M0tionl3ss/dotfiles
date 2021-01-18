@@ -2,7 +2,7 @@
 
 picom &
 nitrogen --restore &
-~/.config/polybar/launch.sh
+~/.config/polybar/launch.sh bspwm
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 

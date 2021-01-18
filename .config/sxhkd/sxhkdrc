@@ -14,8 +14,8 @@ super + Return
 	kitty
 
 # program launcher
-super + @space
-	dmenu_run
+super + space
+	dmenu_run -fn "FiraCode Nerd Font Mono:style=Medium,Regular"
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -91,7 +91,7 @@ super + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
+super + {_,shift + }{ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
