@@ -12,18 +12,22 @@ herbstclient --idle "tag_*" 2>/dev/null | {
                     '#')
                         # the tag is viewed on the focused monitor
                         # TODO Add your formatting tags for focused workspaces
+			echo "%{B#000}%{F-}"
                         ;;
                     ':')
                         # : the tag is not empty
                         # TODO Add your formatting tags for occupied workspaces
+			echo "%{B#06800a}%{F-}"
                         ;;
                     '!')
                         # ! the tag contains an urgent window
                         # TODO Add your formatting tags for workspaces with the urgent hint
+			echo "%{B#f2670a}%{F-}"
                         ;;
                     '-')
                         # - the tag is viewed on a monitor that is not focused
                         # TODO Add your formatting tags for visible but not focused workspaces
+			echo "%{B#b0057a}%{F-}"
                         ;;
                     *)
                         # . the tag is empty
