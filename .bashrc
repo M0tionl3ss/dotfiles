@@ -21,3 +21,6 @@ alias ..='cd ..'
 
 # Sourcing
 source ~/Scripts/system-info.sh
+source ~/Scripts/denako-utils.sh
+. "$HOME/.cargo/env"
+

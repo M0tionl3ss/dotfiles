@@ -3,7 +3,10 @@
 #
 
 Print 
-	sleep 0.2 && scrot -s
+	sleep 0.2 && scrot -l style=dash,width=2,color="green" -s -e 'mv $f ~/Screenshots/'
+
+shift + Print
+	sleep 0.2 && scrot -u -e 'mv $f ~/Screenshots/'
 
 
 XF86Calculator
@@ -14,7 +17,7 @@ super + e
 
 # terminal emulator
 super + Return
-	kitty -e fish
+	kitty 
 
 # program launcher
 super + space
