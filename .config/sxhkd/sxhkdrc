@@ -8,7 +8,6 @@ Print
 shift + Print
 	sleep 0.2 && scrot -u -e 'mv $f ~/Screenshots/'
 
-
 XF86Calculator
 	galculator
 
