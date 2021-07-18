@@ -17,35 +17,36 @@
 ;==========================================================
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #aa000000
+;background = #aa000000
+background = #373c35
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
-secondary = #e60053
+secondary = #bb2b4c
 alert = #bd2c40
 
 ; BSPWM BAR
 [bar/bspwm]
 monitor = ${env:MONITOR:DP-2}
-width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 0.0
-fixed-center = false
+width = 100%:-50
+height = 30
+offset-x = 1.3%
+offset-y = 0.7%
+radius = 15
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 0
-line-color = #f00
+;line-size = 1
+;line-color = #f00
 
-border-size = 0
-border-color = #00000000
+;border-size = 0
+;border-color = #00000000
 
-padding-left = 0
+;padding-left = 0
 padding-right = 3
 
 module-margin-left = 1
@@ -54,16 +55,15 @@ module-margin-right = 2
 ;font-0 = fixed:pixelsize=10;1
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
-font-0 = FiraCode Nerd Font:style=Medium,Regular:pixelsize=10:antialias=true
-font-1 = Font Awesome 5 Free Regular:style=Regular:pixelsize=12:antialias=true
-font-2 = FiraCode Nerd Font:style=Bold:pixelsize=22:antialias=true
+font-0 = FiraCode Nerd Font:style=Medium,Regular:pixelsize=10:antialias=true;1
+font-1 = Font Awesome 5 Free Regular:style=Regular:pixelsize=12:antialias=true;1
+font-2 = FiraCode Nerd Font:style=Bold:pixelsize=22:antialias=true;1
 modules-left = powermenu bspwm 
-modules-center =
+modules-center = 
 modules-right = filesystem pulseaudio xkeyboard memory cpu eth date
 
-
-tray-position = right
-tray-padding = 2
+tray-position = center
+;tray-padding = 2
 ;tray-background = #0063ff
 
 wm-restack = bspwm
@@ -132,6 +132,10 @@ wm-restack = herbstluftwm
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+[module/spotify]
+type = custom/script
+exec = .config/polybar/spotify/spotify-status.sh
+interval = 15
 [module/hlwm-tags]
 type = custom/script
 exec = ~/.config/polybar/hlwm-tags.sh
@@ -191,8 +195,6 @@ label-empty-padding = 2
 ; label-separator = |
 
 format =<label-state> <label-mode>
-
-ws-icon-0 = hallo;
 
 [module/i3]
 type = internal/i3
@@ -313,7 +315,7 @@ interval = 3.0
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %ifname% %downspeed%
+label-connected = %ifname%
 
 format-disconnected = 
 ;format-disconnected = <label-disconnected>
@@ -331,10 +333,11 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-;format-prefix = 
+format = <label>
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 label = %date% %time%
+label-font = 1
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -479,10 +482,10 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-;pseudo-transparency = false
+pseudo-transparency = true
 
 [global/wm]
-margin-top = 0
-margin-bottom = 0
-margin-right = 10
+;margin-top = 0
+;margin-bottom = 0
+;margin-right = 10
 ; vim:ft=dosini

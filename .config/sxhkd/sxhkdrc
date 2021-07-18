@@ -20,8 +20,7 @@ super + Return
 
 # program launcher
 super + space
-	dmenu_run -fn "FiraCode Nerd Font Mono:style=Medium,Regular"
-
+	dmenu_run -y 9 -z 1040 -x 290 -h 27 -fn "FiraCode Nerd Font Mono:style=Medium,Regular"
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
