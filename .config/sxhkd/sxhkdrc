@@ -8,6 +8,9 @@ Print
 shift + Print
 	sleep 0.2 && scrot -u -e 'mv $f ~/Screenshots/'
 
+super + shift + Print
+	sleep 0.2 && scrot '/tmp/%F_%T_$wx$h.png' -l style=dash,width=2,color="purple" -s -e 'xclip -selection clipboard -target image/png -i $f'
+
 XF86Calculator
 	galculator
 
